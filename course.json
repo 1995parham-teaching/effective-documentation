@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://aut.ac.ir/schemas/course",
+  "title": "Course",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 2,
+      "maxLength": 255
+    },
+    "capacity": {
+      "type": "integer",
+      "maximum": 100,
+      "minimum": 10
+    },
+    "professor": {
+      "type": "object",
+      "title": "Professor",
+      "properties": {
+        "name": { "type": "string" },
+        "email": {
+          "type": "string",
+          "format": "email"
+        }
+      },
+      "required": ["name"]
+    },
+    "assistants": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "title": "Teacher Asistant",
+        "properties": {
+          "name": { "type": "string" },
+          "email": {
+            "type": "string",
+            "format": "email"
+          }
+        },
+        "required": ["name", "email"]
+      }
+    },
+    "additionalProperties": false
+  }
+}
