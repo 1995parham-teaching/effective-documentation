@@ -36,7 +36,61 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame}[fragile]
+  \frametitle{Declaring a JSON Schema}
+  \begin{itemize}
+    \item It's generally good practice to include it, though it is not required.
+    \item The \textit{\color{YellowOrange} \$schema} keyword is used to declare
+        that something is JSON Schema.
+    \item Since JSON Schema is itself JSON, it's not always easy to tell when
+        something is JSON Schema or just an arbitrary chunk of JSON.
+  \end{itemize}
+  \begin{minted}[bgcolor=Black]{json}
+{ "$schema": "http://json-schema.org/draft-07/schema#" }
+{ "$schema": "http://json-schema.org/draft/2019-09/schema#" }
+  \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Declaring a unique identifier}
+  \begin{itemize}
+    \item It is also best practice to include an
+      <code class="hl-orange">\$id</code> property as a unique identifier for
+      each schema.
+    \item For now, just set it to a URL at a domain you control, for example:
+  \end{itemize}
+  \begin{minted}[bgcolor=Black]{json}
+{ "$id": "http://yourdomain.com/schemas/myschema.json" }
+  \end{minted}
+\end{frame}
+
 \section{Swagger}
+
+\section{AsyncAPI}
+
+\begin{frame}
+  \frametitle{Event-Driven Architectures}
+  \begin{itemize}
+    \item In most cases, Event-Driven Architectures (EDAs) are broker-centric
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Hello World}
+  \begin{minted}[bgcolor=Black]{yaml}
+asyncapi: 2.2.0
+info:
+  title: Hello world application
+  version: '0.1.0'
+channels:
+  hello:
+    publish:
+      message:
+        payload:
+          type: string
+          pattern: '^hello .+$'
+  \end{minted}
+\end{frame}
 
 \section{Go}
 
