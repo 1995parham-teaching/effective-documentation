@@ -64,6 +64,295 @@
   \end{minted}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Annotations}
+  \begin{itemize}
+    \item JSON Schema includes a few keywords,
+      \textit{\color{YellowOrange} title},
+      \textit{\color{YellowOrange} description},
+      \textit{\color{YellowOrange} default},
+        <code class="hl-orange">examples</code> that
+        <strong class="hl-green">aren’t strictly used for validation</strong>,
+        but are used to describe parts of a schema.
+    \item The \textit{\color{Yellow}title} and
+      \textit{\color{Yellow}description} keywords must be strings.
+    \item
+        A ``title'' will preferably be short, whereas a ``description'' will provide
+        a more lengthy explanation about the purpose of the data described by
+        the schema.
+    \item The \textit{\color{Cyan}default} keyword specifies a default
+      value for an item.
+  \end{itemize}
+\end{frame}
+  <section>
+    <h2>String</h2>
+    <pre><code class="lang-json">
+{ "type": "string" }
+    </code></pre>
+    <ul>
+      <li>Length</li>
+      <ul>
+        <li>
+          The length of a string can be constrained using the
+          <code class="hl-orange">minLength</code> and
+          <code class="hl-orange">maxLength</code> keywords.
+        </li>
+        <li>For both keywords, the value must be a non-negative number.</li>
+      </ul>
+      <li>Regular Expressions</li>
+      <ul>
+        <li>
+          The <code class="hl-orange">pattern</code> keyword is used to restrict
+          a string to a particular regular expression.
+        </li>
+      </ul>
+    </ul>
+  </section>
+  <section>
+    <h2>String (Contd.)</h2>
+    <ul>
+      <li>Format</li>
+      <ul>
+        <li>
+          The <code class="hl-orange">format</code> keyword allows for basic
+          semantic validation on certain kinds of string values that are
+          commonly used.
+        </li>
+        <ul>
+          <li>Dates and times</li>
+          <li>Email addresses</li>
+          <li>Hostnames</li>
+          <li>IP Addresses</li>
+          <li>...</li>
+        </ul>
+      </ul>
+    </ul>
+  </section>
+  <section>
+    <h2>Numeric types</h2>
+    <ul>
+      <li>The integer type is used for integral numbers.</li>
+      <pre><code class="lang-json">
+{ "type": "integer" }
+    </code></pre>
+      <li>
+        The number type is used for any numeric type, either integers or
+        floating point numbers.
+      </li>
+      <pre><code class="lang-json">
+{ "type": "number" }
+    </code></pre>
+    </ul>
+  </section>
+  <section>
+    <h2>Numeric types (Contd.)</h2>
+    <ul>
+      <li>Multiples</li>
+      <ul>
+        <li>
+          Numbers can be restricted to a multiple of a given number, using the
+          <code class="hl-orange">multipleOf</code>
+        </li>
+        <li>It may be set to any positive number.</li>
+      </ul>
+      <li>Range</li>
+      <ul>
+        <li>
+          Ranges of numbers are specified using a combination of the
+          <code class="hl-orange">minimum</code> and
+          <code class="hl-orange">maximum</code> keywords
+        </li>
+      </ul>
+    </ul>
+  </section>
+  <section>
+    <h2>Object</h2>
+    <ul>
+      <li>Objects are the mapping type in JSON.</li>
+      <pre><code class="lang-json">
+{ "type": "object" }
+      </code></pre>
+      <li>Properties</li>
+      <ul>
+        <li>
+          The properties (key-value pairs) on an object are defined using the
+          <code class="hl-orange">properties</code> keyword.
+        </li>
+        <li>
+          The value of <code class="hl-orange">properties</code> is an object,
+          where each key is the name of a property and each value is a JSON
+          schema used to validate that property.
+        </li>
+      </ul>
+    </ul>
+  </section>
+  <section>
+    <h2>Object (Contd.)</h2>
+    <pre><code class="lang-json">
+{
+  "type": "object",
+  "properties": {
+    "number":      { "type": "number" },
+    "street_name": { "type": "string" },
+    "street_type": { "type": "string",
+                     "enum": ["Street", "Avenue", "Boulevard"]
+                   }
+  }
+}
+    </code></pre>
+  </section>
+  <section>
+    <h2>Object (Contd.)</h2>
+    <ul>
+      <li>
+        The <code class="hl-orange">additionalProperties</code> keyword is used
+        to control the handling of extra stuff
+      </li>
+      <li>
+        properties whose names are not listed in the
+        <code class="hl-orange">properties</code> keyword.
+      </li>
+      <li>
+        By default any additional properties are
+        <strong class="hl-green">allowed</strong>
+      </li>
+      <li>
+        If <code class="hl-orange">additionalProperties</code> is an object,
+        that object is a schema that will be used to validate any additional
+        properties not listed in properties.
+      </li>
+    </ul>
+  </section>
+  <section>
+    <pre><code class="lang-json">
+{
+  "type": "object",
+  "properties": {
+    "number": { "type": "number" },
+    "street_name": { "type": "string" },
+    "street_type": { "enum": ["Street", "Avenue", "Boulevard"] }
+  },
+  "additionalProperties": { "type": "string" }
+}
+    </code></pre>
+    <pre><code class="lang-json">
+{
+  "type": "object",
+  "properties": {
+    "number": { "type": "number" },
+    "street_name": { "type": "string" },
+    "street_type": { "enum": ["Street", "Avenue", "Boulevard"] }
+  },
+  "additionalProperties": false
+}
+    </code></pre>
+  </section>
+  <section>
+    <h2>Object (Contd.)</h2>
+    <ul>
+      <li>
+        By default, the properties defined by the properties keyword are
+        <em class="hl-yellow">not required</em>.
+      </li>
+      <li>
+        The <code class="hl-orange">required</code> keyword takes an array of
+        zero or more strings.
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h2>Object (Contd.)</h2>
+    <pre><code class="lang-json">
+{
+  "type": "object",
+  "properties": {
+    "name":      { "type": "string" },
+    "email":     { "type": "string" },
+    "address":   { "type": "string" },
+    "telephone": { "type": "string" }
+  },
+  "required": ["name", "email"]
+}
+    </code></pre>
+  </section>
+  <section>
+    <h2>Array</h2>
+    <ul>
+      <li>Arrays are used for ordered elements.</li>
+      <li>In JSON, each element in an array may be of a different type.</li>
+      <pre><code class="lang-json">
+{ "type": "array" }
+      </code></pre>
+      <li>
+        List validation is useful for arrays of arbitrary length where each item
+        matches the <em class="hl-yellow">same schema</em>.
+      </li>
+      <li>
+        For this kind of array, set the
+        <code class="hl-orange">items</code> keyword to a single schema that
+        will be used to validate all of the items in the array.
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h2>Array (Contd.)</h2>
+    <pre><code class="lang-json">
+{
+  "type": "array",
+  "items": {
+    "type": "number"
+  }
+}
+    </code></pre>
+  </section>
+  <section>
+    <h2>Example</h2>
+    <pre><code class="lang-json">
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Product",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "number",
+      "description": "Product identifier"
+    },
+    "name": { "type": "string" },
+    "price": { "type": "number", "minimum": 0 },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "stock": {
+      "type": "object",
+      "properties": {
+        "warehouse": { "type": "number" },
+        "retail": { "type": "number" }
+        }
+      }
+   }
+}
+    </code></pre>
+  </section>
+  <section>
+    <h2>Example (Contd.)</h2>
+    <pre><code class="lang-json">
+{
+  "id": 1,
+  "name": "Foo",
+  "price": 123,
+   "tags": [
+    "Bar",
+    "Eek"
+  ],
+  "stock": {
+   "warehouse": 300,
+   "retail": 20
+  }
+}
+    </code></pre>
+  </section>
+
 \section{Swagger}
 
 \section{AsyncAPI}
@@ -191,7 +480,7 @@ user/{userId}/signup:
     \item Describes a publish or a subscribe operation. This provides a place to document how and why messages are sent and received.
   \end{itemize}
   \begin{description}
-    \item[tags] A list of tags for API documentation control. Tags can be used for logical grouping of operations.
+    \item[tags] A list of tags for API documentation control. Tags can be used for \textit{\color{YellowOrange} logical grouping} of operations.
     \item[description] A verbose explanation of the operation.
     \item[bindings] A map where the keys describe the name of the protocol and the values describe protocol-specific definitions for the operation.
     \item[message] A definition of the message that will be published or received by this operation. Map containing a single oneOf key is allowed here to specify multiple messages.
