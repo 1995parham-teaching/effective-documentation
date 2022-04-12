@@ -68,46 +68,44 @@
   \frametitle{Annotations}
   \begin{itemize}
     \item JSON Schema includes a few keywords,
-      \textit{\color{YellowOrange} title},
-      \textit{\color{YellowOrange} description},
-      \textit{\color{YellowOrange} default},
-        <code class="hl-orange">examples</code> that
+      \textit{\color{YellowOrange}title},
+      \textit{\color{YellowOrange}description},
+      \textit{\color{YellowOrange}default},
+      \textit{\color{YellowOrange}examples} that
         <strong class="hl-green">aren’t strictly used for validation</strong>,
         but are used to describe parts of a schema.
     \item The \textit{\color{Yellow}title} and
       \textit{\color{Yellow}description} keywords must be strings.
-    \item
-        A ``title'' will preferably be short, whereas a ``description'' will provide
-        a more lengthy explanation about the purpose of the data described by
-        the schema.
+    \item A ``title'' will preferably be short, whereas a ``description'' will provide
+      a more lengthy explanation about the purpose of the data described by
+      the schema.
     \item The \textit{\color{Cyan}default} keyword specifies a default
       value for an item.
   \end{itemize}
 \end{frame}
-  <section>
-    <h2>String</h2>
-    <pre><code class="lang-json">
+
+\begin{frame}
+  \frametitle{String}
+  \begin{minted}[bgcolor=Black]{json}
 { "type": "string" }
-    </code></pre>
-    <ul>
-      <li>Length</li>
-      <ul>
-        <li>
+  \end{minted}
+  \begin{itemize}
+    \item Length
+    \begin{itemize}
+      \item
           The length of a string can be constrained using the
           <code class="hl-orange">minLength</code> and
           <code class="hl-orange">maxLength</code> keywords.
-        </li>
-        <li>For both keywords, the value must be a non-negative number.</li>
-      </ul>
-      <li>Regular Expressions</li>
-      <ul>
-        <li>
-          The <code class="hl-orange">pattern</code> keyword is used to restrict
+      \item For both keywords, the value must be a non-negative number.
+    \end{itemize}
+    \item Regular Expressions
+    \begin{itemize}
+      \item The <code class="hl-orange">pattern</code> keyword is used to restrict
           a string to a particular regular expression.
-        </li>
-      </ul>
-    </ul>
-  </section>
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
   <section>
     <h2>String (Contd.)</h2>
     <ul>
