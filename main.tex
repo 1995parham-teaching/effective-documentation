@@ -71,7 +71,8 @@
 \begin{frame}
   \frametitle{Event-Driven Architectures}
   \begin{itemize}
-    \item In most cases, Event-Driven Architectures (EDAs) are broker-centric
+    \item In most cases, Event-Driven Architectures (EDAs) are broker-centric.
+    \item A message broker (or "broker") is a piece of infrastructure in charge of receiving messages and delivering them to those who have shown interest.
   \end{itemize}
   \includegraphics[width=\textwidth]{./img/simple-event-driven.png}
 \end{frame}
@@ -133,11 +134,13 @@ channels:
     \item[subscribe] A definition of the \textsc{\color{YellowOrange}Subscribe} operation, which defines the messages produced by the application and sent to the channel.
     \item[publish] A definition of the \textsc{\color{LimeGreen}Publish} operation, which defines the messages consumed by the application from the channel.
     \item[bindings] A map where the keys describe the name of the \textit{\text{Cyan}protocol} and the values describe protocol-specific definitions for the channel.
+    \item[parameters] A map of the parameters included in the \textbf{\color{Purple} channel name}.
   \end{description}
 \end{frame}
 
 \begin{frame}[fragile]
   \frametitle{Channels (Cont'd)}
+  \scriptsize
   \begin{minted}[bgcolor=Black]{yaml}
 description: This channel is used to exchange messages about users signing up
 subscribe:
@@ -153,15 +156,66 @@ subscribe:
           $ref: "#/components/schemas/signup"
 bindings:
   amqp:
-    is: queue
-    queue:
-      exclusive: true
+    is: routingKey
+    exchange:
+      name: myExchange
+      type: topic
+      durable: true
+      autoDelete: false
+      vhost: /
+  \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Channels (Cont'd)}
+  \scriptsize
+  \begin{minted}[bgcolor=Black]{yaml}
+user/{userId}/signup:
+  parameters:
+    userId:
+      description: Id of the user
+      schema:
+        type: string
+  subscribe:
+    message:
+      $ref: "#/components/messages/userSignedUp"
   \end{minted}
 \end{frame}
 
 \section{Go}
 
+\begin{frame}
+  \frametitle{How to Run?}
+  \begin{itemize}
+    \item List the service dependencies
+    \item Have a docker-compose with these dependencies
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Comment}
+  \begin{itemize}
+    \item Have comments on exported \textit{\color{YellowOrange}Fields}, \textit{\color{LimeGreen}Methods},
+      \textit{\color{Cyan}Functions} and \textit{\color{RubineRed}Structs}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Have everything on Git}
+  \begin{itemize}
+    \item \textbf{\color{RubineRed}Don't} relay on Environment variables because they don't have any documentation or history.
+    \item \textbf{\color{RubineRed}Don't} store keys with Persons, they will forget it.
+  \end{itemize}
+\end{frame}
+
 \section{Confluence}
 
+\begin{frame}
+  \frametitle{Do's and Don'ts}
+  \begin{itemize}
+    \item Use it for high-level architectures and meeting notes.
+    \item \textbf{\color{RubineRed}Don't} store code-related things because they will be out of sync soon.
+  \end{itemize}
+\end{frame}
 
 \end{document}
