@@ -185,6 +185,50 @@ user/{userId}/signup:
   \end{minted}
 \end{frame}
 
+\begin{frame}[fragile]
+  \frametitle{Operation}
+  \begin{itemize}
+    \item Describes a publish or a subscribe operation. This provides a place to document how and why messages are sent and received.
+  \end{itemize}
+  \begin{description}
+    \item[tags] A list of tags for API documentation control. Tags can be used for logical grouping of operations.
+    \item[description] A verbose explanation of the operation.
+    \item[bindings] A map where the keys describe the name of the protocol and the values describe protocol-specific definitions for the operation.
+    \item[message] A definition of the message that will be published or received by this operation. Map containing a single oneOf key is allowed here to specify multiple messages.
+      However, a message MUST be valid only against one of the message objects.
+  \end{description}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Operation (Cont'd)}
+  \begin{minted}[bgcolor=Black]{yaml}
+operationId: registerUser
+summary: Action to sign a user up
+description: A longer description
+tags:
+  - name: user
+  - name: signup
+  - name: register
+message:
+  headers:
+    type: object
+    properties:
+      applicationInstanceId:
+        description: Unique identifier for a given instance of the publishing application
+        type: string
+  payload:
+    type: object
+    properties:
+      user:
+        $ref: "#/components/schemas/userCreate"
+      signup:
+        $ref: "#/components/schemas/signup"
+bindings:
+  amqp:
+    ack: false
+  \end{minted}
+\end{frame}
+
 \section{Go}
 
 \begin{frame}
@@ -313,7 +357,7 @@ public void onMouseMove(Widget sender, int x, int y) { .. }
   \frametitle{References}
   \begin{itemize}
     \item https://stackoverflow.blog/2021/12/23/best-practices-for-writing-code-comments/
-    \item https://www.asyncapi.com/
+    \item https://www.asyncapi.com/ (Mohammad Nasr)
     \item https://swagger.io/
     \item http://json-schema.org/
   \end{itemize}
