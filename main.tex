@@ -136,6 +136,29 @@ channels:
   \end{description}
 \end{frame}
 
+\begin{frame}[fragile]
+  \frametitle{Channels (Cont'd)}
+  \begin{minted}[bgcolor=Black]{yaml}
+description: This channel is used to exchange messages about users signing up
+subscribe:
+  summary: A user signed up
+  message:
+    description: A longer description of the message
+    payload:
+      type: object
+      properties:
+        user:
+          $ref: "#/components/schemas/user"
+        signup:
+          $ref: "#/components/schemas/signup"
+bindings:
+  amqp:
+    is: queue
+    queue:
+      exclusive: true
+  \end{minted}
+\end{frame}
+
 \section{Go}
 
 \section{Confluence}
