@@ -1,5 +1,5 @@
-# JSON Schema Examples
+# Effective Documentation
 
 ## Introduction
 
-Here I wrote some sample for json schema.
+How to write a good documentation for HTTP services, payloads and etc.
