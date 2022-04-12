@@ -14,6 +14,28 @@
 
 \section{JSON Schema}
 
+\begin{frame}
+  \frametitle{JSON Schema}
+  \begin{itemize}
+    \item JSON schema is JSON also
+    \item The JSON document being validated or described we call the
+      \textit{\color{YellowOrange} instance}, and the document containing the
+      description is called the \textit{\color{GreenYellow} schema}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Hello World}
+  \begin{itemize}
+    \item This accepts anything, as long as it’s valid JSON
+      \mint[bgcolor=Black]{json}|{}|
+    \item The most common thing to do in a JSON Schema is to restrict to a specific type. The \textit{\color{YellowOrange} type} keyword is used for that.
+    \begin{minted}[bgcolor=Black]{json}
+{ "type": "string" }
+    \end{minted}
+  \end{itemize}
+\end{frame}
+
 \section{Swagger}
 
 \section{Go}
