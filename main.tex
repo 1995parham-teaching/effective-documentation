@@ -55,7 +55,7 @@
   \frametitle{Declaring a unique identifier}
   \begin{itemize}
     \item It is also best practice to include an
-      <code class="hl-orange">\$id</code> property as a unique identifier for
+      \textit{\color{YellowOrange} \$id} property as a unique identifier for
       each schema.
     \item For now, just set it to a URL at a domain you control, for example:
   \end{itemize}
@@ -73,6 +73,7 @@
   \begin{itemize}
     \item In most cases, Event-Driven Architectures (EDAs) are broker-centric
   \end{itemize}
+  \includegraphics[width=\textwidth]{./img/simple-event-driven.png}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -95,7 +96,7 @@ channels:
 \begin{frame}[fragile]
   \frametitle{Hello World (Cont'd)}
   \begin{block}{}
-    The first line of the specification starts with the document type asyncapi and the version (2.2.0).
+    The first line of the specification starts with the document type \textit{\color{YellowOrange} asyncapi} and the version (2.2.0).
     This line doesn't have to be the first one,
     but it's a recommended practice.
   \end{block}
@@ -104,10 +105,35 @@ channels:
 \begin{frame}[fragile]
   \frametitle{Hello World (Cont'd)}
   \begin{block}{}
-    The info object contains the minimum required information about the application.
-    It contains the title, which is a memorable name for the API, and the version. While it's not mandatory,
-    it's strongly recommended to change the version whenever you make changes to the API\@.
+    The \textit{\color{YellowOrange} info} object contains the minimum required information about the application.
+    It contains the \textit{\color{YellowGreen} title}, which is a memorable name for the API, and the version. While it's not mandatory,
+    it's strongly recommended to change the \textit{\color{YellowGreen} version} whenever you make changes to the API\@.
   \end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Hello World (Cont'd)}
+  \begin{block}{}
+    The channels section of the specification houses all of the mediums where messages flow through. For example,
+    some systems use topic, event name or routing key.
+    Different kinds of information flow through each channel similar to the analogy of TV channels.
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \begin{block}{}
+    This is the payload of the message that the Hello world application is subscribed to.
+    You can publish the message to the hello channel and the Hello world application will receive it.
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Channels}
+  \begin{description}
+    \item[subscribe] A definition of the \textsc{\color{YellowOrange}Subscribe} operation, which defines the messages produced by the application and sent to the channel.
+    \item[publish] A definition of the \textsc{\color{LimeGreen}Publish} operation, which defines the messages consumed by the application from the channel.
+    \item[bindings] A map where the keys describe the name of the \textit{\text{Cyan}protocol} and the values describe protocol-specific definitions for the channel.
+  \end{description}
 \end{frame}
 
 \section{Go}

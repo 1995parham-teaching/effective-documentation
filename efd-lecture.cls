@@ -9,8 +9,10 @@
 
 \usemintedstyle{one-dark}
 
+\definecolor{Snapp}{RGB}{33, 170, 88}
+
 \usetheme[secheader]{Boadilla}
-\usecolortheme[named=SeaGreen]{structure}
+\usecolortheme[named=Snapp]{structure}
 \useinnertheme{rectangles}
 
 \author[Parham Alvani]{%
