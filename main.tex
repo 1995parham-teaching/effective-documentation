@@ -73,6 +73,9 @@
   \begin{itemize}
     \item In most cases, Event-Driven Architectures (EDAs) are broker-centric.
     \item A message broker (or "broker") is a piece of infrastructure in charge of receiving messages and delivering them to those who have shown interest.
+    \item A publisher (a.k.a. producer) is an application that sends messages to the broker.
+    \item A subscriber (a.k.a. consumer) is an application that connects to the broker, manifests an interest in a certain type of messages,
+      and \textit{\color{YellowOrange}leaves} the connection open so the broker can push messages to them.
   \end{itemize}
   \includegraphics[width=\textwidth]{./img/simple-event-driven.png}
 \end{frame}
@@ -197,7 +200,81 @@ user/{userId}/signup:
   \begin{itemize}
     \item Have comments on exported \textit{\color{YellowOrange}Fields}, \textit{\color{LimeGreen}Methods},
       \textit{\color{Cyan}Functions} and \textit{\color{RubineRed}Structs}.
+    \item Rule 1: Comments should not duplicate the code.
+    \item Rule 2: Good comments do not excuse unclear code.
+    \item Rule 3: If you can’t write a clear comment, there may be a problem with the code.
   \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Comment (Cont'd)}
+  \begin{itemize}
+    \item Rule 4: Comments should dispel confusion, not cause it.
+    \item Rule 5: Explain unidiomatic code in comments.
+    \item Rule 6: Provide links to the original source of copied code.
+    \item Rule 7: Include links to external references where they will be most helpful.
+    \item Rule 8: Add comments when fixing bugs.
+    \item Rule 9: Use comments to mark incomplete implementations.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Comment (Cont'd)}
+  \begin{minted}[bgcolor=Black]{kotlin}
+if (x > 3) {
+   …
+} // if
+  \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Comment (Cont'd)}
+  \begin{minted}[bgcolor=Black]{kotlin}
+private static Node getBestChildNode(Node node) {
+    Node n; // best child node candidate
+    for (Node node: node.getChildren()) {
+        // update n if the current state is better
+        if (n == null || utility(node) > utility(n)) {
+            n = node;
+        }
+    }
+    return n;
+}
+  \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Comment (Cont'd)}
+  \begin{minted}[bgcolor=Black]{kotlin}
+final Object value = (new JSONTokener(jsonString)).nextValue();
+// Note that JSONTokener.nextValue() may return
+// a value equals() to null.
+if (value == null || value.equals(null)) {
+    return null;
+}
+  \end{minted}
+  \begin{minted}[bgcolor=Black]{kotlin}
+/** Converts a Drawable to Bitmap.
+  via https://stackoverflow.com/a/46018816/2219998. */
+  \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Comment (Cont'd)}
+  \scriptsize
+  \begin{minted}[bgcolor=Black]{kotlin}
+// http://tools.ietf.org/html/rfc4180 suggests that CSV lines
+// should be terminated by CRLF, hence the \r\n.
+csvStringBuilder.append("\r\n");
+  \end{minted}
+  \begin{minted}[bgcolor=Black]{kotlin}
+// NOTE: At least in Firefox 2, if the user drags outside of the browser window,
+// mouse-move (and even mouse-down) events will not be received until
+// the user drags back inside the window. A workaround for this issue
+// exists in the implementation for onMouseLeave().
+@Override
+public void onMouseMove(Widget sender, int x, int y) { .. }
+  \end{minted}
 \end{frame}
 
 \begin{frame}
