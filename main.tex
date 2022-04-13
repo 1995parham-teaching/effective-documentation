@@ -12,6 +12,18 @@
 
 \section{Introduction}
 
+\begin{frame}
+  \begin{itemize}
+    \item Documentation is any communicable material that is used to \textit{\color{YellowOrange}describe}, \textit{\color{YellowOrange}explain} or \textit{\color{YellowOrange}instruct}
+      regarding some attributes of an object, system or procedure,
+      such as its \textit{\color{LimeGreen}parts}, \textit{\color{LimeGreen}assembly}, \textit{\color{LimeGreen}installation},
+      \textit{\color{LimeGreen}maintenance} and \textit{\color{LimeGreen}use}.
+    \item Documentation can be provided on paper, online, or on digital or analog media, such as audio tape or CDs. Examples are user guides, white papers, online help, and quick-reference guides.
+    \item Paper or hard-copy documentation has become less common.
+    \item Documentation is often distributed via websites, software products, and other online applications.
+  \end{itemize}
+\end{frame}
+
 \section{JSON Schema}
 
 \begin{frame}
@@ -72,8 +84,8 @@
       \textit{\color{YellowOrange}description},
       \textit{\color{YellowOrange}default},
       \textit{\color{YellowOrange}examples} that
-        <strong class="hl-green">aren’t strictly used for validation</strong>,
-        but are used to describe parts of a schema.
+      \textbf{\color{LimeGreen} aren’t strictly used for validation},
+      but are used to describe parts of a schema.
     \item The \textit{\color{Yellow}title} and
       \textit{\color{Yellow}description} keywords must be strings.
     \item A ``title'' will preferably be short, whereas a ``description'' will provide
@@ -143,7 +155,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Numeric types (contd.)}
+  \frametitle{Numeric types (Cont'd)}
   \begin{itemize}
     \item Multiples
     \begin{itemize}
@@ -185,7 +197,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{Object (cont'd)}
+  \frametitle{Object (Cont'd)}
   \scriptsize
   \begin{minted}[bgcolor=Black]{json}
 {
@@ -202,7 +214,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Object (cont'd)}
+  \frametitle{Object (Cont'd)}
   \begin{itemize}
     \item
       The \textit{\color{Purple}additionalProperties} keyword is used
@@ -251,7 +263,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Object (cont'd)}
+  \frametitle{Object (Cont'd)}
   \begin{itemize}
     \item
       By default, the properties defined by the properties keyword are
@@ -263,7 +275,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{Object (cont'd)}
+  \frametitle{Object (Cont'd)}
   \begin{minted}[bgcolor=Black]{json}
 {
   "type": "object",
@@ -340,7 +352,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{Example (cont'd)}
+  \frametitle{Example (Cont'd)}
   \begin{minted}[bgcolor=Black]{json}
 {
   "id": 1,
@@ -395,15 +407,31 @@
 
 \section{Swagger}
 
+\begin{frame}
+  \begin{itemize}
+    \begin{block}{}
+      The OpenAPI Specification (OAS) defines a \textit{\color{YelloOrange}standard},
+      \textit{\color{LimeGreen}language-agnostic} interface
+      to RESTful APIs which allows both humans and computers to discover and understand
+      the capabilities of the service \textbf{\color{RubineRed}without} access to source code, documentation,
+      or through network traffic inspection.
+    \end{block}
+    \begin{block}{}
+      When properly defined, a consumer can understand and interact with the remote service
+      with a minimal amount of implementation logic.
+    \end{block}
+  \end{itemize}
+\end{frame}
+
 \section{AsyncAPI}
 
 \begin{frame}
   \frametitle{Event-Driven Architectures}
   \begin{itemize}
     \item In most cases, Event-Driven Architectures (EDAs) are broker-centric.
-    \item A message broker (or "broker") is a piece of infrastructure in charge of receiving messages and delivering them to those who have shown interest.
-    \item A publisher (a.k.a. producer) is an application that sends messages to the broker.
-    \item A subscriber (a.k.a. consumer) is an application that connects to the broker, manifests an interest in a certain type of messages,
+    \item A message broker (or ``broker'') is a piece of infrastructure in charge of receiving messages and delivering them to those who have shown interest.
+    \item A publisher (a.k.a.\ producer) is an application that sends messages to the broker.
+    \item A subscriber (a.k.a.\ consumer) is an application that connects to the broker, manifests an interest in a certain type of messages,
       and \textit{\color{YellowOrange}leaves} the connection open so the broker can push messages to them.
   \end{itemize}
   \includegraphics[width=\textwidth]{./img/simple-event-driven.png}
