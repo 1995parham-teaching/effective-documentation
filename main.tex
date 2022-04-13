@@ -248,8 +248,8 @@
   },
   "additionalProperties": { "type": "string" }
 }
-    </code></pre>
-    <pre><code class="lang-json">
+  \end{minted}
+  \begin{minted}[bgcolor=Black]{json}
 {
   "type": "object",
   "properties": {
@@ -381,7 +381,7 @@
   "required": [
     "from",
     "to",
-    "accept_rate",
+    "accept_rate"
   ],
   "properties": {
     "from": {
@@ -761,7 +761,7 @@ channels:
   \begin{description}
     \item[subscribe] A definition of the \textsc{\color{YellowOrange}Subscribe} operation, which defines the messages produced by the application and sent to the channel.
     \item[publish] A definition of the \textsc{\color{LimeGreen}Publish} operation, which defines the messages consumed by the application from the channel.
-    \item[bindings] A map where the keys describe the name of the \textit{\text{Cyan}protocol} and the values describe protocol-specific definitions for the channel.
+    \item[bindings] A map where the keys describe the name of the \textit{\color{Cyan}protocol} and the values describe protocol-specific definitions for the channel.
     \item[parameters] A map of the parameters included in the \textbf{\color{Purple} channel name}.
   \end{description}
 \end{frame}
@@ -849,6 +849,13 @@ message:
         $ref: "#/components/schemas/userCreate"
       signup:
         $ref: "#/components/schemas/signup"
+  \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Operation (Cont'd)}
+  \scriptsize
+  \begin{minted}[bgcolor=Black]{yaml}
 bindings:
   mqtt:
     qos: 2
@@ -883,7 +890,7 @@ bindings:
       \textit{\color{Cyan}Functions} and \textit{\color{RubineRed}Structs}.
     \item Rule 1: Comments should not duplicate the code.
     \item Rule 2: Good comments do not excuse unclear code.
-    \item Rule 3: If you can’t write a clear comment, there may be a problem with the code.
+    \item Rule 3: If you can't write a clear comment, there may be a problem with the code.
   \end{itemize}
 \end{frame}
 
