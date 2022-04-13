@@ -388,9 +388,6 @@
       "type": "string",
       "format": "date-time"
     },
-    "city_id": {
-      "type": "integer"
-    },
     "to": {
       "type": "string",
       "format": "date-time"
@@ -408,22 +405,20 @@
 \section{Swagger}
 
 \begin{frame}
-  \begin{itemize}
-    \begin{block}{}
-      The OpenAPI Specification (OAS) defines a \textit{\color{YelloOrange}standard},
-      \textit{\color{LimeGreen}language-agnostic} interface
-      to RESTful APIs which allows both humans and computers to discover and understand
-      the capabilities of the service \textbf{\color{RubineRed}without} access to source code, documentation,
-      or through network traffic inspection.
-    \end{block}
-    \begin{block}{}
-      When properly defined, a consumer can understand and interact with the remote service
-      with a minimal amount of implementation logic.
-    \end{block}
-  \end{itemize}
+  \begin{block}{}
+    The OpenAPI Specification (OAS) defines a \textit{\color{YellowOrange}standard},
+    \textit{\color{LimeGreen}language-agnostic} interface
+    to RESTful APIs which allows both humans and computers to discover and understand
+    the capabilities of the service \textbf{\color{RubineRed}without} access to source code, documentation,
+    or through network traffic inspection.
+  \end{block}
+  \begin{block}{}
+    When properly defined, a consumer can understand and interact with the remote service
+    with a minimal amount of implementation logic.
+  \end{block}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
   \frametitle{Hello World}
   \begin{minted}[bgcolor=Black]{yaml}
 title: Sample Pet Store App
@@ -447,6 +442,253 @@ version: 1.0.1
     \item[url] The URL pointing to the contact information. MUST be in the format of a URL\@.
     \item[email] The email address of the contact person/organization. MUST be in the format of an email address.
   \end{description}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Server}
+  \begin{description}
+    \item[url] A URL to the target host. This URL supports Server Variables and MAY be relative, to indicate that the host location is relative to the location where the OpenAPI document is being served.
+      Variable substitutions will be made when a variable is named in {brackets}.
+    \item[variables] A map between a variable name and its value. The value is used for substitution in the server's URL template.
+  \end{description}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Server (Cont'd)}
+  \scriptsize
+  \begin{minted}[bgcolor=Black]{yaml}
+servers:
+  - url: https://{username}.gigantic-server.com:{port}/{basePath}
+    description: The production API server
+    variables:
+      username:
+        # note! no enum here means it is an open value
+        default: demo
+        description: this value is assigned by the service provider, in this example `gigantic-server.com`
+      port:
+        enum:
+          - '8443'
+          - '443'
+        default: '8443'
+      basePath:
+        # open meaning there is the opportunity to use special base paths as assigned by the provider, default is `v2`
+        default: v2
+  \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Server (Cont'd)}
+  \scriptsize
+  \begin{minted}[bgcolor=Black]{yaml}
+servers:
+  - url: https://doago-snapp-ode-{code}.apps.private.teh-1.snappcloud.io
+    description: Snapp ODE
+    variables:
+      code:
+        default: "001"
+        enum:
+          - "001"
+          - "002"
+          - "003"
+          - "004"
+          - "005"
+          - "006"
+          - "007"
+          - "008"
+          - "009"
+          - "010"
+          - "011"
+          - "012"
+          - "013"
+          - "014"
+          - "015"
+  \end{minted}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Paths}
+  \begin{itemize}
+    \item Holds the relative paths to the individual endpoints and their operations.
+  \end{itemize}
+  \begin{description}
+    \item[summary] An optional, string summary, intended to apply to all operations in this path.
+    \item[description] An optional, string description, intended to apply to all operations in this path.
+    \item[get] A definition of a GET operation on this path.
+    \item[put] A definition of a PUT operation on this path.
+    \item[post] A definition of a POST operation on this path.
+    \item[delete] A definition of a DELETE operation on this path.
+    \item[parameters] A list of parameters that are applicable for all the operations described under this path.
+  \end{description}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Paths (Cont'd)}
+  \scriptsize
+  \begin{minted}[bgcolor=Black]{yaml}
+paths:
+  /api/config/passenger/{id}/{os}:
+    get:
+      summary: return passenger configuration
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: snapp passenger id
+          schema:
+            type: integer
+            format: int64
+        - name: os
+          in: path
+          required: true
+          description: passenger os
+          schema:
+            type: string
+            enum: [unknown, pwa, ios, android]
+  \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Paths (Cont'd)}
+  \scriptsize
+  \begin{minted}[bgcolor=Black]{yaml}
+      responses:
+        "200":
+          description: ok
+          content:
+            application/json:
+              schema:
+                description: |
+                  a JSON object containing configuration data of dispatching team
+                type: object
+                properties:
+                ack_url:
+                  description: ackerman url
+                  type: string
+                event_interval:
+                  description: polling duration in seconds
+                  type: string
+  \end{minted}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Operation}
+  \begin{description}
+    \item[tags] A list of tags for API documentation control. Tags can be used for logical grouping of operations by resources or any other qualifier.
+    \item[summary] A short summary of what the operation does.
+    \item[description] A verbose explanation of the operation behavior.
+    \item[parameters] A list of parameters that are applicable for this operation.
+    \item[requestBody] The request body applicable for this operation. The requestBody is \textsc{\color{RubineRed}only supported} in HTTP methods where the HTTP 1.1 specification RFC7231 has explicitly defined semantics for request bodies.
+    \item[responses] The list of possible responses as they are returned from executing this operation.
+  \end{description}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Parameter}
+  \begin{description}
+    \item[name] The name of the parameter. Parameter names are case sensitive.
+    \begin{itemize}
+      \item If in is ``path'', the name field MUST correspond to a template expression occurring within the path field
+      \item If in is ``header'' and the name field is ``Accept'', ``Content-Type'' or ``Authorization'', the parameter definition SHALL be ignored.
+      \item For all other cases, the name corresponds to the parameter name used by the in property.
+    \end{itemize}
+    \item[in] The location of the parameter. Possible values are ``query'', ``header'', ``path'' or ``cookie''.
+    \item[required] Determines whether this parameter is mandatory.
+  \end{description}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Parameter (Cont'd)}
+  \begin{minted}[bgcolor=Black]{yaml}
+name: token
+in: header
+description: token to be passed as a header
+required: true
+schema:
+  type: array
+  items:
+    type: integer
+    format: int64
+  \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Parameter (Cont'd)}
+  \begin{minted}[bgcolor=Black]{yaml}
+name: username
+in: path
+description: username to fetch
+required: true
+schema:
+  type: string
+  \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Security Scheme}
+  \begin{itemize}
+    \item Defines a security scheme that can be used by the operations.
+  \end{itemize}
+  \scriptsize
+  \begin{minted}[bgcolor=Black]{yaml}
+type: http
+scheme: basic
+  \end{minted}
+  \begin{minted}[bgcolor=Black]{yaml}
+type: apiKey
+name: api_key
+in: header
+  \end{minted}
+  \begin{minted}[bgcolor=Black]{yaml}
+type: http
+scheme: bearer
+bearerFormat: JWT
+  \end{minted}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Security Scheme (Cont'd)}
+  \begin{description}
+    \item[type] The type of the security scheme. Valid values are ``apiKey'', ``http'', ``oauth2'', ``openIdConnect''.
+    \item[description] A short description for security scheme.
+  \end{description}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Security Scheme [http]}
+  \begin{description}
+    \item[scheme] The name of the HTTP Authorization scheme to be used in the Authorization header as defined in RFC7235.
+    \item[bearerFormat] A hint to the client to identify how the bearer token is formatted.
+  \end{description}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Security Scheme [apiKey]}
+  \begin{description}
+    \item[name] The name of the header, query or cookie parameter to be used.
+    \item[in] The location of the API key. Valid values are ``query'', ``header'' or ``cookie''.
+  \end{description}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Security Scheme (Cont'd)}
+  \scriptsize
+  \begin{minted}[bgcolor=Black]{yaml}
+paths:
+  /api/snapp/passenger/{passengerID}:
+    get:
+      tags:
+        - Passenger
+      summary: Passenger
+      operationId: Passenger
+      security:
+        - APIKeyAuth: []
+components:
+  securitySchemes:
+    APIKeyAuth:
+      type: apiKey
+      name: X-API-Key
+      in: header
+  \end{minted}
 \end{frame}
 
 \section{AsyncAPI}
@@ -584,6 +826,7 @@ user/{userId}/signup:
 
 \begin{frame}[fragile]
   \frametitle{Operation (Cont'd)}
+  \scriptsize
   \begin{minted}[bgcolor=Black]{yaml}
 operationId: registerUser
 summary: Action to sign a user up
@@ -607,9 +850,20 @@ message:
       signup:
         $ref: "#/components/schemas/signup"
 bindings:
+  mqtt:
+    qos: 2
+    retain: true
   amqp:
     ack: false
   \end{minted}
+\end{frame}
+
+\begin{frame}
+  \frametile{AsyncAPI vs OpenAPI}
+  \begin{itemize}
+    \item Security Scheme
+    \item Components and References
+  \end{itemize}
 \end{frame}
 
 \section{Go}
