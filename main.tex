@@ -93,100 +93,100 @@
     \item Length
     \begin{itemize}
       \item
-          The length of a string can be constrained using the
-          <code class="hl-orange">minLength</code> and
-          <code class="hl-orange">maxLength</code> keywords.
+        The length of a string can be constrained using the
+        \textit{\color{LimeGreen}minLength} and
+        \textit{\color{YellowOrange}maxLength} keywords.
       \item For both keywords, the value must be a non-negative number.
     \end{itemize}
     \item Regular Expressions
     \begin{itemize}
-      \item The <code class="hl-orange">pattern</code> keyword is used to restrict
-          a string to a particular regular expression.
+      \item The \textit{\color{YellowOrange}pattern} keyword is used to restrict
+        a string to a particular regular expression.
     \end{itemize}
   \end{itemize}
 \end{frame}
 
-  <section>
-    <h2>String (Contd.)</h2>
-    <ul>
-      <li>Format</li>
-      <ul>
-        <li>
-          The <code class="hl-orange">format</code> keyword allows for basic
-          semantic validation on certain kinds of string values that are
-          commonly used.
-        </li>
-        <ul>
-          <li>Dates and times</li>
-          <li>Email addresses</li>
-          <li>Hostnames</li>
-          <li>IP Addresses</li>
-          <li>...</li>
-        </ul>
-      </ul>
-    </ul>
-  </section>
-  <section>
-    <h2>Numeric types</h2>
-    <ul>
-      <li>The integer type is used for integral numbers.</li>
-      <pre><code class="lang-json">
+\begin{frame}
+  \frametitle{String (cont'd)}
+  \begin{itemize}
+    \item Format
+    \begin{itemize}
+      \item The \textit{\color{Cyan}format} keyword allows for basic
+        semantic validation on certain kinds of string values that are
+        commonly used.
+      \begin{itemize}
+        \item Dates and times
+        \item Email addresses
+        \item Hostnames
+        \item IP Addresses
+        \item \ldots
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Numeric types}
+  \begin{itemize}
+    \item The integer type is used for integral numbers.
+    \begin{minted}[bgcolor=Black]{json}
 { "type": "integer" }
-    </code></pre>
-      <li>
-        The number type is used for any numeric type, either integers or
-        floating point numbers.
-      </li>
-      <pre><code class="lang-json">
+    \end{minted}
+    \item
+      The number type is used for any numeric type, either integers or
+      floating point numbers.
+
+    \begin{minted}[bgcolor=Black]{json}
 { "type": "number" }
-    </code></pre>
-    </ul>
-  </section>
-  <section>
-    <h2>Numeric types (Contd.)</h2>
-    <ul>
-      <li>Multiples</li>
-      <ul>
-        <li>
-          Numbers can be restricted to a multiple of a given number, using the
-          <code class="hl-orange">multipleOf</code>
-        </li>
-        <li>It may be set to any positive number.</li>
-      </ul>
-      <li>Range</li>
-      <ul>
-        <li>
-          Ranges of numbers are specified using a combination of the
-          <code class="hl-orange">minimum</code> and
-          <code class="hl-orange">maximum</code> keywords
-        </li>
-      </ul>
-    </ul>
-  </section>
-  <section>
-    <h2>Object</h2>
-    <ul>
-      <li>Objects are the mapping type in JSON.</li>
-      <pre><code class="lang-json">
+    \end{minted}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Numeric types (contd.)}
+  \begin{itemize}
+    \item Multiples
+    \begin{itemize}
+      \item
+        Numbers can be restricted to a multiple of a given number, using the
+        \textit{\color{YellowOrange}multipleOf}.
+
+      \item It may be set to any positive number.
+    \end{itemize}
+    \item Range
+    \begin{itemize}
+      \item
+        Ranges of numbers are specified using a combination of the
+        \textit{\color{YellowOrange}minimum} and
+        \textit{\color{YellowOrange}maximum} keywords
+
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Object}
+  \begin{itemize}
+    \item Objects are the mapping type in JSON.
+    \begin{minted}[bgcolor=Black]{json}
 { "type": "object" }
-      </code></pre>
-      <li>Properties</li>
-      <ul>
-        <li>
-          The properties (key-value pairs) on an object are defined using the
-          <code class="hl-orange">properties</code> keyword.
-        </li>
-        <li>
-          The value of <code class="hl-orange">properties</code> is an object,
-          where each key is the name of a property and each value is a JSON
-          schema used to validate that property.
-        </li>
-      </ul>
-    </ul>
-  </section>
-  <section>
-    <h2>Object (Contd.)</h2>
-    <pre><code class="lang-json">
+    \end{minted}
+    \item Properties
+    \begin{itemize}
+      \item
+        The properties (key-value pairs) on an object are defined using the
+        \textit{\color{YellowOrange}properties} keyword.
+      \item
+        The value of \textit{\color{YellowOrange}properties} is an object,
+        where each key is the name of a property and each value is a JSON
+        schema used to validate that property.
+    \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Object (cont'd)}
+  \begin{minted}[bgcolor=Black]{json}
 {
   "type": "object",
   "properties": {
@@ -197,32 +197,34 @@
                    }
   }
 }
-    </code></pre>
-  </section>
-  <section>
-    <h2>Object (Contd.)</h2>
-    <ul>
-      <li>
-        The <code class="hl-orange">additionalProperties</code> keyword is used
-        to control the handling of extra stuff
-      </li>
-      <li>
-        properties whose names are not listed in the
-        <code class="hl-orange">properties</code> keyword.
-      </li>
-      <li>
-        By default any additional properties are
-        <strong class="hl-green">allowed</strong>
-      </li>
-      <li>
-        If <code class="hl-orange">additionalProperties</code> is an object,
-        that object is a schema that will be used to validate any additional
-        properties not listed in properties.
-      </li>
-    </ul>
-  </section>
-  <section>
-    <pre><code class="lang-json">
+  \end{minted}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Object (cont'd)}
+  \begin{itemize}
+    \item
+      The \textit{\color{Purple}additionalProperties} keyword is used
+      to control the handling of extra stuff
+
+    \item
+      properties whose names are not listed in the
+      \textit{\color{YellowOrange}properties} keyword.
+
+    \item
+      By default any additional properties are
+      \textit{\color{LimeGreen}allowed}
+
+    \item
+      If \textit{\color{Purple}additionalProperties} is an object,
+      that object is a schema that will be used to validate any additional
+      properties not listed in properties.
+
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \begin{minted}[bgcolor=Black]{json}
 {
   "type": "object",
   "properties": {
@@ -243,24 +245,24 @@
   },
   "additionalProperties": false
 }
-    </code></pre>
-  </section>
-  <section>
-    <h2>Object (Contd.)</h2>
-    <ul>
-      <li>
-        By default, the properties defined by the properties keyword are
-        <em class="hl-yellow">not required</em>.
-      </li>
-      <li>
-        The <code class="hl-orange">required</code> keyword takes an array of
-        zero or more strings.
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>Object (Contd.)</h2>
-    <pre><code class="lang-json">
+  \end{minted}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Object (cont'd)}
+  \begin{itemize}
+    \item
+      By default, the properties defined by the properties keyword are
+      \textit{\color{RubineRed}not required}.
+    \item
+      The \textit{\color{YellowOrange}required} keyword takes an array of
+      zero or more strings.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Object (cont'd)}
+  \begin{minted}[bgcolor=Black]{json}
 {
   "type": "object",
   "properties": {
@@ -271,41 +273,43 @@
   },
   "required": ["name", "email"]
 }
-    </code></pre>
-  </section>
-  <section>
-    <h2>Array</h2>
-    <ul>
-      <li>Arrays are used for ordered elements.</li>
-      <li>In JSON, each element in an array may be of a different type.</li>
-      <pre><code class="lang-json">
+  \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Array}
+  \begin{itemize}
+    \item Arrays are used for ordered elements.
+    \item In JSON, each element in an array may be of a different type.
+    \begin{minted}[bgcolor=Black]{json}
 { "type": "array" }
-      </code></pre>
-      <li>
-        List validation is useful for arrays of arbitrary length where each item
-        matches the <em class="hl-yellow">same schema</em>.
-      </li>
-      <li>
-        For this kind of array, set the
-        <code class="hl-orange">items</code> keyword to a single schema that
-        will be used to validate all of the items in the array.
-      </li>
-    </ul>
-  </section>
-  <section>
-    <h2>Array (Contd.)</h2>
-    <pre><code class="lang-json">
+    \end{minted}
+    \item
+      List validation is useful for arrays of arbitrary length where each item
+      matches the \textit{\color{Yellow} same schema}.
+    \item
+      For this kind of array, set the
+      \textit{\color{YellowOrange} items} keyword to a single schema that
+      will be used to validate all of the items in the array.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Array (cont'd)}
+  \begin{minted}[bgcolor=Black]{json}
 {
   "type": "array",
   "items": {
     "type": "number"
   }
 }
-    </code></pre>
-  </section>
-  <section>
-    <h2>Example</h2>
-    <pre><code class="lang-json">
+  \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Example}
+  \scriptsize
+  \begin{minted}[bgcolor=Black]{json}
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "title": "Product",
@@ -330,11 +334,12 @@
       }
    }
 }
-    </code></pre>
-  </section>
-  <section>
-    <h2>Example (Contd.)</h2>
-    <pre><code class="lang-json">
+  \end{minted}
+\end{frame}
+
+\begin{frame}[fragile]
+  \frametitle{Example (cont'd)}
+  \begin{minted}[bgcolor=Black]{json}
 {
   "id": 1,
   "name": "Foo",
@@ -348,8 +353,8 @@
    "retail": 20
   }
 }
-    </code></pre>
-  </section>
+  \end{minted}
+\end{frame}
 
 \section{Swagger}
 
